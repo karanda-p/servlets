@@ -33,8 +33,6 @@ public class MyFilter implements Filter {
         String[] auth = authDecoded.split(":");
         System.out.println(Arrays.toString(auth));
         if (auth[0].equals(USER) && auth[1].equals(PASSWORD)) {
-//            RequestDispatcher rd = req.getRequestDispatcher("/books/");
-//            rd.include(req, resp);
             filterChain.doFilter(req, resp);
         } else {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
