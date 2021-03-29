@@ -1,6 +1,7 @@
 package com.karandap.servlets;
 
-import com.google.gson.Gson;
+
+import com.karandap.servlets.dao.BookDAOImpl;
 import com.karandap.servlets.entity.Book;
 
 import javax.persistence.EntityManager;
@@ -17,52 +18,49 @@ import java.io.PrintWriter;
 @WebServlet("/book")
 public class MyServlet extends HttpServlet {
 
-    private EntityManagerFactory emf;
+    private BookDAOImpl bookDAO = new BookDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");
-        em.getTransaction().begin();
-        Book result = em.find(Book.class, Integer.valueOf(id));
-
-        Gson gson = new Gson();
-        String bookJSON = gson.toJson(result);
         PrintWriter pw = resp.getWriter();
+        if (id == null) {
+            pw.print(bookDAO.getAllBooks());
+        } else {
+            Book result = bookDAO.getBookById(Integer.valueOf(id));
+            pw.print(result);
+        }
 
-        pw.print(bookJSON);
-        em.getTransaction().commit();
         pw.flush();
-        em.close();
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
+
         Book book = new Book();
         resp.setCharacterEncoding("UTF-8");
         book.setName(req.getParameter("name"));
         book.setAuthor(req.getParameter("author"));
-        em.getTransaction().begin();
-        em.merge(book);
-        em.getTransaction().commit();
-        em.close();
+        bookDAO.updateBook(book);
+
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Book target = em.find(Book.class, Integer.valueOf(req.getParameter("id")));
-        em.remove(target);
-        em.getTransaction().commit();
-        em.close();
+
+        bookDAO.deleteBook(Integer.valueOf(req.getParameter("id")));
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Book book = new Book();
+        resp.setCharacterEncoding("UTF-8");
+        book.setId(Integer.valueOf(req.getParameter("id")));
+        book.setName(req.getParameter("name"));
+        book.setAuthor(req.getParameter("author"));
+        bookDAO.updateBook(book);
     }
 }
