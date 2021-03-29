@@ -29,7 +29,6 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter pw = resp.getWriter();
         String path = req.getPathInfo();
@@ -91,6 +90,7 @@ public class MyServlet extends HttpServlet {
             return;
         }
 
+        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         bookDAO.deleteBook(Integer.parseInt(splits[1]));
 
     }
@@ -121,6 +121,8 @@ public class MyServlet extends HttpServlet {
         Book book = om.readValue(req.getReader(), Book.class);
         book.setId(Integer.parseInt(splits[1]));
         bookDAO.updateBook(book);
+        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         pw.print(om.writeValueAsString(book));
+
     }
 }
