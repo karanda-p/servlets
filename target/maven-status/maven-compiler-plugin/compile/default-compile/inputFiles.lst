@@ -1,7 +1,7 @@
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/HelloResource.java
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/HelloApplication.java
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/entity/Book.java
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/HelloServlet.java
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/repository/BookRepositoryImpl.java
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/MyServlet.java
-/Users/pavelkaranda/IdeaProjects/servlets/src/main/java/com/karandap/servlets/repository/BookRepository.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\HelloServlet.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\dao\BookDAO.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\entity\Book.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\HelloApplication.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\HelloResource.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\MyServlet.java
+C:\Users\User\Documents\GitHub\servlets\src\main\java\com\karandap\servlets\dao\BookDAOImpl.java

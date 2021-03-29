@@ -1,7 +1,7 @@
-com/karandap/servlets/repository/BookRepository.class
-com/karandap/servlets/HelloApplication.class
-com/karandap/servlets/HelloServlet.class
-com/karandap/servlets/repository/BookRepositoryImpl.class
-com/karandap/servlets/HelloResource.class
-com/karandap/servlets/entity/Book.class
-com/karandap/servlets/MyServlet.class
+com\karandap\servlets\dao\BookDAOImpl.class
+com\karandap\servlets\entity\Book.class
+com\karandap\servlets\HelloServlet.class
+com\karandap\servlets\HelloApplication.class
+com\karandap\servlets\dao\BookDAO.class
+com\karandap\servlets\MyServlet.class
+com\karandap\servlets\HelloResource.class

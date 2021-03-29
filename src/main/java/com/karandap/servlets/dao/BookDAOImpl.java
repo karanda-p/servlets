@@ -41,9 +41,10 @@ public class BookDAOImpl implements BookDAO {
     @Transactional
     public void deleteBook(int id) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         Book book = getBookById(id);
-        em.remove(book);
+        em.getTransaction().begin();
+        Book merged = em.merge(book);
+        em.remove(merged);
         em.getTransaction().commit();
     }
 
