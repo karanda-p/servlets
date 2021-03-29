@@ -31,7 +31,6 @@ public class MyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-//        String id = req.getParameter("id");
         PrintWriter pw = resp.getWriter();
         String path = req.getPathInfo();
         List<Book> books = bookDAO.getAllBooks();
@@ -58,14 +57,18 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter pw = resp.getWriter();
         String path = req.getPathInfo();
         if (path == null || path.equals("/")) {
             Book book = om.readValue(req.getReader(), Book.class);
             bookDAO.updateBook(book);
+            pw.print(om.writeValueAsString(book));
+
         } else {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
-
+        resp.setStatus(HttpServletResponse.SC_CREATED);
     }
 
     @Override
@@ -89,31 +92,35 @@ public class MyServlet extends HttpServlet {
         }
 
         bookDAO.deleteBook(Integer.parseInt(splits[1]));
+
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        PrintWriter pw = resp.getWriter();
         String path = req.getPathInfo();
         List<Book> books = bookDAO.getAllBooks();
-        if (path == null || path.equals("/")){
+        if (path == null || path.equals("/")) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         String[] splits = path.split("/");
 
-        if (splits.length != 2){
+        if (splits.length != 2) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        if (bookDAO.getBookById(Integer.parseInt(splits[1])) == null){
+        if (bookDAO.getBookById(Integer.parseInt(splits[1])) == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
         Book book = om.readValue(req.getReader(), Book.class);
         book.setId(Integer.parseInt(splits[1]));
         bookDAO.updateBook(book);
+        pw.print(om.writeValueAsString(book));
     }
 }
