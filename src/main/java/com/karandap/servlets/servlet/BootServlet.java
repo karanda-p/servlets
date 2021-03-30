@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/books/*")
-public class MyServlet extends HttpServlet {
+public class BootServlet extends HttpServlet {
 
     private BookDAO bookDAO;
 

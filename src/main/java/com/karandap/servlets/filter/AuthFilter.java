@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Base64;
 
 @WebFilter("/books/*")
-public class MyFilter implements Filter {
+public class AuthFilter implements Filter {
 
     private static final String USER = "user";
     private static final String PASSWORD = "password";
